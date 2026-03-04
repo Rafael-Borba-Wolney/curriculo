@@ -1,55 +1,278 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Rafael Borba</title>
-</head>
-<head>
+
   <style>
-    body { background:#f3f4f6; color:#111827; }
+    :root {
+      --bg: #f3f4f6;
+      --text: #111827;
 
-    header { background:#1e3a8a; color:#ffffff; }
-    header p { color:#dbeafe; }
+      --primary: #1e3a8a;
+      --primary-2: #dbeafe;
 
-    nav a { color:#fde68a; }
-    nav a:hover { color:#ffffff; }
+      --card: #ffffff;
+
+      --link: #2563eb;
+      --link-hover: #7c3aed;
+
+      --radius: 14px;
+      --shadow: 0 10px 25px rgba(2, 6, 23, 0.08);
+
+      --gap-1: 10px;
+      --gap-2: 16px;
+      --gap-3: 24px;
+
+      --container: 980px;
+    }
+
+    /* Reset básico */
+    * { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.5;
+    }
+
+    /* Container geral */
+    header, main, aside, footer {
+      max-width: var(--container);
+      margin: 0 auto;
+      padding: 0 16px;
+    }
+
+    /* HEADER */
+    header {
+      margin-top: 18px;
+      padding: 18px 16px;
+      background: var(--primary);
+      color: #fff;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--gap-2);
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 1.6rem;
+      letter-spacing: 0.2px;
+    }
+
+    header p {
+      margin: 2px 0 0;
+      color: var(--primary-2);
+    }
+
+    header > h1,
+    header > p {
+      flex: 1 1 260px;
+    }
+
+    nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: center;
+      justify-content: flex-end;
+      flex: 1 1 260px;
+    }
+
+    nav a {
+      color: #fde68a;
+      text-decoration: none;
+      font-weight: 600;
+      padding: 8px 10px;
+      border-radius: 10px;
+      transition: transform 0.12s ease, background 0.12s ease, color 0.12s ease;
+    }
+
+    nav a:hover {
+      color: #ffffff;
+      background: rgba(255, 255, 255, 0.12);
+      transform: translateY(-1px);
+    }
+
+    /* MAIN */
+    main {
+      margin-top: 18px;
+      display: flex;
+      flex-direction: column;
+      gap: var(--gap-3);
+      padding-bottom: 20px;
+    }
+
+    section {
+      border-radius: var(--radius);
+      padding: 16px;
+      box-shadow: var(--shadow);
+    }
 
     /* Títulos */
-    h2 { color:#0f172a; background:#e0f2fe; }
-    h3 { color:#1f2937; }
+    h2 {
+      margin: 0 0 10px;
+      color: #0f172a;
+      background: #e0f2fe;
+      display: inline-block;
+      padding: 6px 10px;
+      border-radius: 12px;
+    }
 
-    /* Seções com cores diferentes (bem leve) */
-    #sobre { background:#ecfdf5; }       /* verde bem claro */
-    #formacao { background:#eff6ff; }    /* azul bem claro */
-    #habilidades { background:#fff7ed; } /* laranja bem claro */
-    #projetos { background:#fdf2f8; }    /* rosa bem claro */
-    #contato { background:#f5f3ff; }     /* roxo bem claro */
+    h3 {
+      margin: 0 0 6px;
+      color: #1f2937;
+    }
 
-    article { background:#ffffff; }
+    /* Seções com cores leves */
+    #sobre { background: #ecfdf5; }
+    #formacao { background: #eff6ff; }
+    #habilidades { background: #fff7ed; }
+    #projetos { background: #fdf2f8; }
+    #contato { background: #f5f3ff; }
+
+    /* Cards */
+    article {
+      background: var(--card);
+      border-radius: 12px;
+      padding: 14px;
+      box-shadow: 0 6px 16px rgba(2, 6, 23, 0.06);
+      border: 1px solid rgba(15, 23, 42, 0.06);
+    }
+
+    article p {
+      margin: 6px 0;
+      color: #111827;
+    }
+
+    article p:last-child { margin-bottom: 0; }
+
+    /* Formação e Projetos: layout base */
+    #formacao,
+    #projetos {
+      display: flex;
+      flex-direction: column;
+      gap: var(--gap-2);
+    }
+
+    /* Em telas maiores: 2 colunas (Flexbox) */
+    @media (min-width: 760px) {
+      #formacao,
+      #projetos {
+        flex-direction: row;
+        flex-wrap: wrap;
+        align-items: stretch;
+      }
+
+      #formacao h2,
+      #projetos h2 {
+        flex: 0 0 100%;
+      }
+
+      #formacao article,
+      #projetos article {
+        flex: 1 1 calc(50% - 12px);
+        min-width: 280px;
+      }
+    }
 
     /* Links */
-    a { color:#2563eb; }
-    a:hover { color:#7c3aed; } /* roxinho no hover */
+    a { color: var(--link); }
+    a:hover { color: var(--link-hover); }
 
     /* Lista */
-    li { color:#0f172a; }
-    li::marker { color:#f59e0b; } /* bolinha amarela */
+    ul {
+      margin: 10px 0 0;
+      padding-left: 20px;
+    }
+
+    li { color: #0f172a; }
+    li::marker { color: #f59e0b; }
 
     /* Form */
-    input, textarea { background:#ffffff; color:#111; border-color:#cbd5e1; }
-    button { background:#10b981; color:#ffffff; }      /* verde */
-    button:hover { background:#059669; }
+    form {
+      background: rgba(255, 255, 255, 0.65);
+      border: 1px solid rgba(15, 23, 42, 0.06);
+      border-radius: 12px;
+      padding: 14px;
+    }
 
-    aside { background:#ffffff; }
-    footer { background:#111827; color:#e5e7eb; }
+    label { font-weight: 600; }
+
+    input, textarea {
+      width: 100%;
+      margin-top: 6px;
+      padding: 10px 12px;
+      background: #ffffff;
+      color: #111;
+      border: 1px solid #cbd5e1;
+      border-radius: 10px;
+      outline: none;
+    }
+
+    input:focus, textarea:focus {
+      border-color: rgba(37, 99, 235, 0.75);
+      box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.18);
+    }
+
+    button {
+      margin-top: 10px;
+      border: 0;
+      padding: 10px 14px;
+      border-radius: 12px;
+      background: #10b981;
+      color: #ffffff;
+      font-weight: 700;
+      cursor: pointer;
+      transition: transform 0.12s ease, background 0.12s ease;
+    }
+
+    button:hover {
+      background: #059669;
+      transform: translateY(-1px);
+    }
+
+    /* ASIDE */
+    aside {
+      margin-top: 18px;
+      background: var(--card);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 16px;
+    }
+
+    aside h2 { margin-bottom: 8px; }
+
+    /* FOOTER */
+    footer {
+      margin: 18px auto 26px;
+      background: #111827;
+      color: #e5e7eb;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 14px 16px;
+    }
+
+    footer p { margin: 6px 0; }
   </style>
-
 </head>
-<body>
 
+<body>
   <header>
-    <h1>Rafael Borba Wolney</h1>
-    <p>Desenvolvedor Web Júnior</p>
+    <div>
+      <h1>Rafael Borba Wolney</h1>
+      <p>Desenvolvedor Web Júnior</p>
+    </div>
 
     <nav>
       <a href="#sobre">Sobre</a>
@@ -61,7 +284,6 @@
   </header>
 
   <main>
-
     <section id="sobre">
       <h2>Sobre</h2>
       <p>Sou estudante de tecnologia com foco em desenvolvimento web.</p>
@@ -115,24 +337,23 @@
 
       <form action="#" method="post">
         <p>
-          <label for="nome">Nome</label><br>
-          <input type="text" id="nome" name="nome">
+          <label for="nome">Nome</label><br />
+          <input type="text" id="nome" name="nome" />
         </p>
 
         <p>
-          <label for="email">E-mail</label><br>
-          <input type="email" id="email" name="email">
+          <label for="email">E-mail</label><br />
+          <input type="email" id="email" name="email" />
         </p>
 
         <p>
-          <label for="mensagem">Mensagem</label><br>
+          <label for="mensagem">Mensagem</label><br />
           <textarea id="mensagem" name="mensagem" rows="5"></textarea>
         </p>
 
         <button type="submit">Enviar</button>
       </form>
     </section>
-
   </main>
 
   <aside>
@@ -147,6 +368,5 @@
     <p>Rafael Borba - 2026</p>
     <p>&copy; 2026. Todos os direitos reservados.</p>
   </footer>
-
 </body>
 </html>
